@@ -5,7 +5,10 @@ const authRouter = Router();
 
 authRouter
     .post('/login', login)
-    .post('/register', upload.single('file'), register)
+    .post('/register', upload.single('file'), (req, res, next) => { 
+        console.log("📥 Received request to /register");
+        next(); // מעביר הלאה לפונקציה register
+    }, register);
 
 export default authRouter;
 

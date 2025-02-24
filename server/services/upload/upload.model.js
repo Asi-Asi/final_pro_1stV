@@ -6,7 +6,7 @@ import { __dirname } from '../../globals.js';
 function setCloud() {
     // מגדירים את הענן
     cloudinary.config({
-        cloud_name: 'shaykos',
+        cloud_name: process.env.CLOUD_NAME,
         api_key: process.env.CLOUDINARY_API_KEY,
         api_secret: process.env.CLOUDINARY_SECRET
     });
@@ -18,10 +18,16 @@ async function emptyFolder() {
 }
 
 export async function uploadToCloud(filePath) {
+    console.log("📤 Uploading file to Cloudinary:", filePath);
     setCloud();
-    let result = await cloudinary.uploader.upload(filePath, { upload_preset: "shenkar2025" });
+
+    let result = await cloudinary.uploader.upload(filePath, {
+        upload_preset: "FitTrackUnsigned",
+
+    });        
+    console.log("✅ Upload successful:", result.secure_url);
+
     await emptyFolder();
     return result;
-
 }
 
