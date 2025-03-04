@@ -18,14 +18,10 @@ async function emptyFolder() {
 }
 
 export async function uploadToCloud(filePath) {
-    console.log("📤 Uploading file to Cloudinary:", filePath);
+
     setCloud();
 
-    let result = await cloudinary.uploader.upload(filePath, {
-        upload_preset: "FitTrackUnsigned",
-
-    });        
-    console.log("✅ Upload successful:", result.secure_url);
+    let result = await cloudinary.uploader.upload(filePath, {upload_preset: process.env.CLOUDINARY_PRESET});        
 
     await emptyFolder();
     return result;
