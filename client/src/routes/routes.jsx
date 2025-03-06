@@ -6,7 +6,7 @@ import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/profile";
 
 
-let isAuth = false;
+let isAuth = true;
 
 export const router = createBrowserRouter([
     { path: '/', element: <Login /> },

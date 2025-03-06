@@ -19,19 +19,31 @@ export async function login(req, res) {
 }
 
 export async function register(req, res) {
-    let { username, password } = req.body;
 
-    let result = await uploadToCloud(req.file.path);
-
-    let ans = await addNewUser(username, password, result.secure_url);
-
-    if (!ans) {
-        res.status(400).json({
-            message: 'User already exists'
-        });
-    } else {
-        res.status(201).json({
-            message: 'User registered successfully'
-        });
+    try{
+        
+        let { fullName, email, phone, username, password } = req.body;
+        
+        //אם הועלתה תמונה של פרופיל
+        let profileImageUrl = null;
+        if(req.file) {
+    
+            let result = await uploadToCloud(req.file.path);
+            profileImageUrl = result.secure_url;
+    
+        }
+    
+        let ans = await addNewUser(fullName, username, email, phone, password, profileImageUrl);
+    
+        if (!ans.success) {
+            return res.status(400).json({ message: ans.message });
+        }
+    
+        return res.status(201).json({ message: "User registered successfully" });
     }
+    catch{
+        return res.status(500).json({ message: "Internal Server Error" });
+
+    }
+
 }

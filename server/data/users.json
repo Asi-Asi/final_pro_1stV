@@ -1,6 +1,6 @@
 [
-    {"username":"malek222","password":"12345","profileImage":"https://res.cloudinary.com/assiahmad002/image/upload/v1740854916/xjolrxiusunqey7a4arr.jpg"},
-    {"username":"assi","password":"12345","profileImage":"https://res.cloudinary.com/assiahmad002/image/upload/v1740854962/dzzdtlfw0mhkbwqp0yf5.jpg"},
-    {"username":"ccc","password":"ccc","profileImage":"https://res.cloudinary.com/assiahmad002/image/upload/v1740948226/eoyhp7wcwpuvxheegbhi.jpg"}
-
+    {"fullName":"ahmad assi","username":"a7md02","email":"asi-ahmad@outlook.com","phone":"0546931667","password":"123456","profileImage":null},
+    {"fullName":"mohmad assi","username":"m7md002","email":"ass@adada.com","phone":"123456","password":"654321","profileImage":null},
+    {"fullName":"ahmad assi","username":"a7md002","email":"adsfgbzcxv","phone":"1234567","password":"12365441","profileImage":null},
+    {"fullName":"mahmod assi","username":"m7mod","email":"asdfvbgnb","phone":"321741456","password":"321741963","profileImage":null}
 ]
