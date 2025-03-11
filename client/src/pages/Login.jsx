@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Header } from "../components/LoginComponents/Header";
-import { WelcomeSection } from "@/components/LoginComponents/WelcomeSection";
-import { LoginForm } from "@/components/LoginComponents/LoginForm";
-import { Footer } from "@/components/Footer";
+import { Header } from "../components/layout/Header_Login_signup";
+import { Footer } from "@/components/layout/Footer";
+import { WelcomeSection } from "@/components/auth/WelcomeSection";
+import { LoginForm } from "@/components/auth/LoginForm";
 
 export default function LoginPage() { 
   const [username, setUsername] = useState("");

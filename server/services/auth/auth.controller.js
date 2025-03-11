@@ -1,6 +1,8 @@
 import { uploadToCloud } from "../upload/upload.model.js";
 import { validateUser, addNewUser } from "./auth.model.js";
 
+;
+
 export async function login(req, res) {
     let { username, password } = req.body;
 

@@ -1,6 +1,7 @@
-import PropTypes from "prop-types"
+import * as React from "react"
 
 import { cn } from "@/lib/utils"
+/*eslint-disable*/
 
 function Input({
   className,
@@ -20,11 +21,5 @@ function Input({
       {...props} />
   );
 }
-
-Input.propTypes = {
-  className: PropTypes.string,
-  type: PropTypes.string.isRequired,
-}
-
 
 export { Input }
