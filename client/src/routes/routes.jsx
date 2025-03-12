@@ -10,7 +10,7 @@ let isAuth = true;
 
 export const router = createBrowserRouter([
   { path: "/", element: <Login /> },
-  { path: "/Register", element: <Register /> },
-  { path: "/Dashboard", element: <Dashboard /> },
-  { path: "/Profile", element: isAuth ? <Profile /> : <Navigate to="/" /> },
+  { path: "/register", element: <Register /> },
+  { path: "/dashboard", element: <Dashboard /> },
+  { path: "/profile", element: isAuth ? <Profile /> : <Navigate to="/" /> },
 ]);

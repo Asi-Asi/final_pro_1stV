@@ -17,9 +17,6 @@ export default function StatsSection() {
         color="bg-[#FFD100]"
         footerText={
           <div className="flex flex-col gap-3 w-full">
-            {" "}
-            {/* ✅ הרחבת הכל לרוחב הכרטיס */}
-            {/* ✅ שמירה על ריווח כך שהפרוגרס יהיה בשורה נפרדת */}
             <div className="flex flex-col mt-5 gap-2 w-full">
               {" "}
               {/* ✅ וידוא שהפרוגרס יהיה ברוחב מלא */}
@@ -85,29 +82,30 @@ export default function StatsSection() {
         ]}
       />
 
-      <StatCard
-        title="Recent Performance"
-        description="Max Weight Lifted"
-        color="bg-[#B8860B]"
-        footerText={
-          <>
-            <div className="w-full font-medium text-base text-[#F4F4F4]">
-              <div className="flex w-full gap-3">
-                <span className="font-bold text-[#F4F4F4]">Bench Press:</span>
-                <span className="text-[#FFD100]">85 kg</span>
-              </div>
-              <div className="flex w-full gap-3">
-                <span className="font-bold text-[#F4F4F4]">Squat:</span>
-                <span className="text-[#FFD100]">120 kg</span>
-              </div>
-              <div className="flex w-full gap-3">
-                <span className="font-bold text-[#F4F4F4]">Deadlift:</span>
-                <span className="text-[#FFD100]">140 kg</span>
-              </div>
-            </div>
-          </>
-        }
-      />
+<StatCard
+  title="Recent Performance"
+  description="Max Weight Lifted"
+  color="bg-[#B8860B]"
+  footerText={
+    <>
+      <div className="w-full font-medium text-base sm:text-sm text-[#F4F4F4]">
+        <div className="flex w-full gap-3">
+          <span className="font-bold text-[#F4F4F4]">Bench Press:</span>
+          <span className="text-[#FFD100]">85 kg</span>
+        </div>
+        <div className="flex w-full gap-3">
+          <span className="font-bold text-[#F4F4F4]">Squat:</span>
+          <span className="text-[#FFD100]">120 kg</span>
+        </div>
+        <div className="flex w-full gap-3">
+          <span className="font-bold text-[#F4F4F4]">Deadlift:</span>
+          <span className="text-[#FFD100]">140 kg</span>
+        </div>
+      </div>
+    </>
+  }
+/>
+
     </div>
   );
 }

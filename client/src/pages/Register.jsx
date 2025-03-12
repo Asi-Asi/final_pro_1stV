@@ -13,6 +13,8 @@ import { PhoneInput } from "@/components/auth/CustomInputs";
 import { FullNameInput } from "@/components/auth/CustomInputs";
 import { UsernameInput } from "@/components/auth/CustomInputs";
 import { EmailInput } from "@/components/auth/CustomInputs";
+import { Header } from "@/components/layout/Header_Login_signup";
+import { Footer } from "@/components/layout/Footer";
 
 
 export default function Register() {
@@ -94,36 +96,55 @@ export default function Register() {
     
 
     return (
-
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#232323] to-[#1A1A1A] text-white relative overflow-hidden pt-16 pb-16">
-        
-        {/* עיגולים מטושטשים להוספת אפקט רקע */}
-            <div className="absolute w-80 h-80 bg-[#FF5733] opacity-15 rounded-full blur-2xl top-16 right-24"></div>
-            <div className="absolute w-80 h-80 bg-[#FFD100] opacity-15 rounded-full blur-2xl bottom-16 left-24"></div>
-
-
-            <div className="bg-[#1E1E1E] p-8 rounded-xl shadow-2xl border-l-4 border-[#FFD100] w-full max-w-lg">
-                <h2 className="text-3xl font-extrabold mb-6 text-center text-[#F4F4F4] tracking-wide">Create Your Account</h2>
-                <form className="space-y-6" onSubmit={userRegister}>
-                    <ProfileImageUpload profileBase64={profileBase64} setProfileImage={setProfileImage} />
-                    
-                    <FullNameInput fullName={fullName} setFullName={setFullName} />
-                    <UsernameInput username={username} setUsername={setUsername} />
-                    <EmailInput email={email} setEmail={setEmail} />
-                    <PhoneInput phone={phone} setPhone={setPhone} />
-
-                    <PasswordField id="password" label="Password" value= {password} setValue={setPassword}/>
-                    <PasswordField id="confirmPassword" label="Confirm Password" value={confirmPassword} setValue={setConfirmPassword}/>
-
-
-                    <TermsCheckbox agreeTerms={agreeTerms} setAgreeTerms={setAgreeTerms} />
-                    {/* Signup Btn */}
-                    <Button type="submit" className="w-full py-3 bg-[#FF5733] text-white font-bold rounded-md shadow-lg transition-all hover:bg-white hover:text-gray-600" disabled={!agreeTerms}>Sign Up<ArrowRight className="ml-2" size={18} /></Button>
-                    {/* Clear Btn */}
-                    <Button type="reset" onClick={resetForm} className="w-full py-3 bg-gray-600 text-white font-bold rounded-md shadow-lg transition-all hover:bg-white hover:text-gray-600">Clear</Button>
-                </form>
-            </div>
-            <ToastContainer />
+        <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#232323] to-[#1A1A1A] text-white">
+            {/* Header ממוקם בחלק העליון, מחוץ לאזור המרכזי */}
+            <Header />
+    
+            <main className="flex-1 flex items-center justify-center relative overflow-hidden pt-16 pb-16">
+                {/* עיגולים מטושטשים להוספת אפקט רקע */}
+                <div className="absolute w-80 h-80 bg-[#FF5733] opacity-15 rounded-full blur-2xl top-16 right-24"></div>
+                <div className="absolute w-80 h-80 bg-[#FFD100] opacity-15 rounded-full blur-2xl bottom-16 left-24"></div>
+    
+                <div className="bg-[#1E1E1E] p-8 rounded-xl shadow-2xl border-l-4 border-[#FFD100] w-full max-w-lg">
+                    <h2 className="text-3xl font-extrabold mb-6 text-center text-[#F4F4F4] tracking-wide">
+                        Create Your Account
+                    </h2>
+                    <form className="space-y-6" onSubmit={userRegister}>
+                        <ProfileImageUpload profileBase64={profileBase64} setProfileImage={setProfileImage} />
+    
+                        <FullNameInput fullName={fullName} setFullName={setFullName} />
+                        <UsernameInput username={username} setUsername={setUsername} />
+                        <EmailInput email={email} setEmail={setEmail} />
+                        <PhoneInput phone={phone} setPhone={setPhone} />
+    
+                        <PasswordField id="password" label="Password" value={password} setValue={setPassword} />
+                        <PasswordField id="confirmPassword" label="Confirm Password" value={confirmPassword} setValue={setConfirmPassword} />
+    
+                        <TermsCheckbox agreeTerms={agreeTerms} setAgreeTerms={setAgreeTerms} />
+    
+                        {/* Signup Btn */}
+                        <Button
+                            type="submit"
+                            className="w-full py-3 bg-[#FF5733] text-white font-bold rounded-md shadow-lg transition-all hover:bg-white hover:text-gray-600"
+                            disabled={!agreeTerms}
+                        >
+                            Sign Up <ArrowRight className="ml-2" size={18} />
+                        </Button>
+    
+                        {/* Clear Btn */}
+                        <Button
+                            type="reset"
+                            onClick={resetForm}
+                            className="w-full py-3 bg-gray-600 text-white font-bold rounded-md shadow-lg transition-all hover:bg-white hover:text-gray-600"
+                        >
+                            Clear
+                        </Button>
+                    </form>
+                </div>
+                <ToastContainer />
+            </main>
+            <Footer />
         </div>
     );
+    
 }

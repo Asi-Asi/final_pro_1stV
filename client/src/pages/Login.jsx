@@ -1,19 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Header } from "../components/layout/Header_Login_signup";
 import { Footer } from "@/components/layout/Footer";
 import { WelcomeSection } from "@/components/auth/WelcomeSection";
 import { LoginForm } from "@/components/auth/LoginForm";
 
+
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";// ✅ import the UserContext
+
+
+
+
+
+
+
+
 export default function LoginPage() { 
+
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext); // ✅ get the setUser function from the UserContext
+
+  // בדיקה אם יש משתמש מחובר
+  useEffect(() => {
+    const user = localStorage.getItem("user"); 
+    if (user) {
+      navigate("/dashboard"); 
+    }
+  }, [navigate]);
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log("username: ", username);
-    console.log("Password: ", password);
-    console.log("Remember Me: ", rememberMe);
+  
 
     try {
       let response = await fetch('http://localhost:5500/api/auth/login', {
@@ -28,6 +49,13 @@ export default function LoginPage() {
       console.log(' Data ==> ', data);
       console.log(' Response ==> ', response);
       
+      // אם הכניסה נכונה
+      if ( data.success ) {
+        localStorage.setItem("user", JSON.stringify(data.user)); 
+        setUser(data.user); // ✅ עדכון המשתמש ב-Context
+        navigate('/dashboard'); 
+      }
+
     } catch (error) {
       console.log("Error: ", error);
     }

@@ -1,10 +1,11 @@
 import { Progress } from "@/components/ui/progress";
 
-export default function WelcomeBanner() {
+/* eslint-disable*/
+export default function WelcomeBanner({user}) {
   return (
     <div className="bg-gradient-to-r from-[#333533] to-[#1E1E1E] p-6 md:p-8 border-b border-[#333533]">
       <div className="max-w-4xl">
-        <h2 className="text-2xl font-bold text-[#F4F4F4] md:text-3xl">Hello, User!</h2>
+        <h2 className="text-2xl font-bold text-[#F4F4F4] md:text-3xl">Hello, {user? user.fullName : "user"}!!</h2>
         <p className="mt-2 text-[#F4F4F4]/80">
           This week, you completed 3 out of 5 planned workouts. Keep it up!
         </p>

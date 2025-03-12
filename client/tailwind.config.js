@@ -66,6 +66,8 @@ const config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        xs: "425px", // מגדיר מסכים קטנים יותר מ-sm
+
       },
       keyframes: {
         "accordion-down": {
@@ -80,6 +82,12 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+
+      screens: {
+        "2xl": "1440px",
+        "xs": "425px", // מגדיר מסכים קטנים יותר מ-sm
+
       },
     },
   },

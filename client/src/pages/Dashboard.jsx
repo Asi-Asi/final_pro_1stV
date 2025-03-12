@@ -17,7 +17,20 @@ import Charts from "@/components/sections/Dash-Sections/ChartsSection";
 import RecentWorkouts from "@/components/sections/Dash-Sections/RecentWorkoutSection";
 
 
+
+// יבוא פונקציות ליבוא נתונים מהקונטקסט
+// השמור בזיכרון המקומי
+import { UserContext } from "@/context/userContext";
+import { useContext } from "react";
+
+
 export default function Dashboard() {
+
+  
+  const { user } = useContext(UserContext);
+
+
+
   return (
     <>
       <SidebarProvider w-full h-full overflow-hidden>
@@ -39,7 +52,8 @@ export default function Dashboard() {
               <DesktopHeader />
 
               {/* Welcome Banner */}
-              <WelcomeBanner />
+              {/* שליחת פרטי המשתמש כפרמטרים */}
+              <WelcomeBanner user={user} />
 
               {/* Dashboard Content */}
               <div className="p-4 md:p-6 lg:p-8">
