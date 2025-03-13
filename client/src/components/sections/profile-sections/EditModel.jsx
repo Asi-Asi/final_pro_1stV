@@ -6,15 +6,27 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { useState, useRef } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
-export default function ProfileEditModal() {
+/*eslint-disable*/
+
+export default function ProfileEditModal({ userDetails = {}, setUserDetails }) {
   const [open, setOpen] = useState(false);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(""); // ✅ נוסיף username לסטייט
   const [image, setImage] = useState("/default-avatar.png");
   const fileInputRef = useRef(null);
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    // בעת פתיחת המודל, נטען את הנתונים מהמשתמש
+    setFullName(userDetails?.fullName || "");
+    setEmail(userDetails?.email || "");
+    setUsername(userDetails?.username || ""); // ✅ נוסיף טעינת username
+    setImage(userDetails?.profileImage || "/default-avatar.png");
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
 
   const handleImageChange = (event) => {
@@ -25,6 +37,58 @@ export default function ProfileEditModal() {
       reader.readAsDataURL(file);
     }
   };
+
+  async function updateUserDetails() {
+    try {
+      if (!username.trim()) {
+        toast.error("❌ Username is required!", {
+          position: "top-center",
+          autoClose: 3000,
+        });
+        return;
+      }
+
+      let formData = new FormData();
+      formData.append("username", username); // ✅ הוספת username חובה
+
+      if (fullName.trim()) formData.append("fullName", fullName);
+      if (email.trim()) formData.append("email", email);
+      if (image !== "/default-avatar.png") formData.append("file", image);
+
+      let response = await fetch("http://localhost:5500/api/auth/update", {
+        method: "PUT",
+        body: formData,
+      });
+
+      let data = await response.json();
+      if (!response.ok) {
+        toast.error(`❌ ${data.message}`, {
+          position: "top-center",
+          autoClose: 3000,
+        });
+        return;
+      }
+
+      toast.success("✅ Profile updated successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+
+      setUserDetails((prev) => ({
+        ...prev,
+        fullName: fullName.trim() ? fullName : prev.fullName,
+        email: email.trim() ? email : prev.email,
+        profileImage: image ? image : prev.profileImage,
+      }));
+
+      handleClose();
+    } catch (error) {
+      toast.error("❌ Error updating profile, please try again!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+    }
+  }
 
   return (
     <>
@@ -59,15 +123,36 @@ export default function ProfileEditModal() {
             }}
           >
             {/* Title */}
-            <Typography variant="h5" sx={{ fontWeight: "bold", color: "#FF5733" }}>
+            <Typography
+              variant="h5"
+              sx={{ fontWeight: "bold", color: "#FF5733" }}
+            >
               Edit Profile Details
             </Typography>
-            <Typography variant="body1" sx={{ color: "gray", textAlign: "center" }}>
+            <Typography
+              variant="body1"
+              sx={{ color: "gray", textAlign: "center" }}
+            >
               Update your personal details and profile picture below.
             </Typography>
 
             {/* Avatar */}
-            <Avatar src={image} sx={{ width: 100, height: 100, border: "3px solid #FF5733" }} />
+            <Avatar
+              src={image || "/default-avatar.png"}
+              sx={{ width: 100, height: 100, border: "3px solid #FF5733" }}
+            />
+
+            <TextField
+              fullWidth
+              label="Username"
+              variant="outlined"
+              size="medium"
+              value={username}
+              InputProps={{
+                readOnly: true, // ✅ הופך את השדה לקריאה בלבד
+              }}
+              sx={{ marginTop: "10px", backgroundColor: "#f4f4f4" }}
+            />
 
             {/* File upload button */}
             <Button
@@ -100,9 +185,10 @@ export default function ProfileEditModal() {
               label="Full Name"
               variant="outlined"
               size="medium"
+              placeholder="Enter your name"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              sx={{ fontSize: "1rem" }}
+              sx={{ marginTop: "10px" }}
             />
 
             <TextField
@@ -110,32 +196,39 @@ export default function ProfileEditModal() {
               label="Email"
               variant="outlined"
               size="medium"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              sx={{ fontSize: "1rem" }}
+              sx={{ marginTop: "10px" }}
             />
 
             {/* Save & Close buttons */}
             <Button
-              variant="contained"
+              onClick={updateUserDetails}
               sx={{
                 backgroundColor: "#FF5733",
+                color: "white",
+                marginTop: "15px",
                 fontSize: "1rem",
                 fontWeight: "bold",
                 padding: "10px 20px",
-                "&:hover": { backgroundColor: "#cc4629" },
               }}
               fullWidth
             >
               Save Changes
             </Button>
 
-            <Button onClick={handleClose} sx={{ marginTop: "10px", color: "gray" }}>
+            <Button
+              onClick={handleClose}
+              sx={{ marginTop: "10px", color: "gray" }}
+            >
               Cancel
             </Button>
           </Box>
         </Fade>
       </Modal>
+
+      <ToastContainer />
     </>
   );
 }

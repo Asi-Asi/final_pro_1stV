@@ -1,8 +1,8 @@
 [
   {
-    "fullName": "ahmad assi",
+    "fullName": "John Updated",
     "username": "a7mad002",
-    "email": "741@741.com",
+    "email": "john.updated@example.com",
     "phone": "741963654",
     "password": "741963",
     "profileImage": null
@@ -21,6 +21,14 @@
     "email": "8754@741.com",
     "phone": "7410852741",
     "password": "741741",
+    "profileImage": null
+  },
+  {
+    "fullName": "afif assi",
+    "username": "af123",
+    "email": "asd@sad.com",
+    "phone": "6549873217",
+    "password": "741963",
     "profileImage": null
   }
 ]

@@ -17,21 +17,36 @@ import WorkoutHistory from "@/components/sections/profile-sections/workout-histo
 /* ייבוא PopperComponent */
 import PopperComponent from "@/components/sections/profile-sections/EditModel";
 
+import { useNavigate } from "react-router-dom";
+
+
 // יבוא פונקציות ליבוא נתונים מהקונטקסט
 // השמור בזיכרון המקומי
 import { UserContext } from "@/context/userContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function ProfilePage() {
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user"); 
+    if (!user) {
+      navigate("/"); 
+    }
+  }, [navigate]);
+
+
+
+
   const { user } = useContext(UserContext);
-
-
   const userImage = user?.profileImage || null; // כתובת התמונה
   const fullName = user?.fullName || "User";
   const initials = fullName
     .split(" ")
     .map((name) => name.charAt(0).toUpperCase())
     .join("");
+
 
 
 
