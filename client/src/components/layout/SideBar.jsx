@@ -42,9 +42,7 @@ export default function SidebarComponent() {
     group-data-[state=collapsed]:justify-center justify-start"
       >
         {/* SidebarTrigger ממורכז כשהתפריט סגור, ומיושר לימין כשהוא פתוח */}
-        <SidebarTrigger
-          className="text-[#F4F4F4] w-full"
-        />
+
 
         <div className="flex items-center gap-2 p-4 group-data-[state=collapsed]:hidden">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#FFD100]">
